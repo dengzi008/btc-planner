@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>囤比特币规划器 - 计算你的 BTC 囤积时间</title>
+  <meta name="description" content="输入每日投入与目标 BTC 数量，实时获取比特币价格，计算需要多少天/月/年才能达成囤币目标。" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-50">
+  <div class="bg-grid"></div>
+  <main class="relative z-10 max-w-4xl mx-auto px-4 py-10 space-y-6">
+    <header class="text-center space-y-2">
+      <p class="text-emerald-300 uppercase tracking-[0.2em] text-xs">Crypto Planner</p>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white drop-shadow-md">囤比特币规划器 - 算算你需要多久才能达到目标</h1>
+      <p class="text-slate-300 max-w-2xl mx-auto">实时拉取 BTC 价格，输入每日投入与目标持仓，看看需要多少时间搞定。坚持定投，别忘了保持理性。</p>
+    </header>
+
+    <section class="glass p-5 sm:p-6 rounded-2xl space-y-4">
+      <div class="grid sm:grid-cols-2 gap-4">
+        <label class="space-y-2">
+          <span class="text-sm text-slate-200 font-semibold">每天投入金额</span>
+          <input id="dailyInput" type="number" step="0.01" min="0" value="50" class="input" placeholder="例如 50" />
+        </label>
+        <label class="space-y-2">
+          <span class="text-sm text-slate-200 font-semibold">目标持仓比特币数量 (BTC)</span>
+          <input id="targetInput" type="number" step="0.0001" min="0" value="0.1" class="input" placeholder="例如 0.1" />
+        </label>
+      </div>
+      <div class="grid sm:grid-cols-3 gap-4 items-end">
+        <label class="space-y-2 sm:col-span-2">
+          <span class="text-sm text-slate-200 font-semibold">货币单位</span>
+          <select id="currencySelect" class="input">
+            <option value="USD" selected>USD 美元</option>
+            <option value="CNY">CNY 人民币</option>
+            <option value="EUR">EUR 欧元</option>
+            <option value="JPY">JPY 日元</option>
+            <option value="GBP">GBP 英镑</option>
+          </select>
+          <p id="rateInfo" class="text-xs text-slate-400 mt-1">汇率/价格加载中...</p>
+        </label>
+        <button id="calcBtn" class="btn">计算规划</button>
+      </div>
+      <div class="flex gap-3">
+        <button id="suggestBtn" class="ghost-btn">随机建议</button>
+        <button id="shareBtn" class="ghost-btn">分享结果</button>
+      </div>
+    </section>
+
+    <section class="glass p-5 sm:p-6 rounded-2xl space-y-4">
+      <div class="flex items-center justify-between gap-2">
+        <h2 class="text-xl font-bold text-white">结果</h2>
+        <div id="loading" class="hidden text-amber-300 text-sm flex items-center gap-2">
+          <span class="loader"></span> 计算中...
+        </div>
+      </div>
+      <div id="resultMain" class="text-2xl sm:text-3xl font-extrabold text-emerald-300 min-h-[48px]"></div>
+      <div id="resultDetail" class="text-slate-200 space-y-1 text-sm sm:text-base"></div>
+      <div id="funny" class="text-amber-300 font-semibold"></div>
+      <div id="suggestion" class="text-sky-300 text-sm"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
